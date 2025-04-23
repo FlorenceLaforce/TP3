@@ -1,0 +1,22 @@
+<etudiants>
+    <etudiant>
+        <nom>Roux</nom>
+        <prenom>Alexandre</prenom>
+        <age>20</age>
+        <resultats>
+            <matiere nom="mathematiques">14.5</matiere>
+            <matiere nom="physique">15</matiere>
+            <matiere nom="informatique">16.75</matiere>
+        </resultats>
+    </etudiant>
+    <etudiant>
+        <nom>Simon</nom>
+        <prenom>Camille</prenom>
+        <age>19</age>
+        <resultats>
+            <matiere nom="mathematiques">11</matiere>
+            <matiere nom="physique">10.5</matiere>
+            <matiere nom="informatique">15</matiere>
+    </resultats>
+    </etudiant>
+</etudiants>

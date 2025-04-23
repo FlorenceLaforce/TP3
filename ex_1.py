@@ -9,18 +9,25 @@ class AgregateurDonnees:
         self.donnees = []
 
     def lire_json(self):
-        data = {"nom": "Gracia Sophie", "age": 20, "notes": [12, 18, 13],
-                }
+        data = [{"nom": "Gracia Sophie", "age": 20, "notes": {"maths": 15,"physique": 12.5, "info": 16.25}},
+                {"nom": "Bernard Antoine", "age": 19, "notes": {"maths": 13.5,"physique": 14, "info": 12}},
+                {"nom": "Moreau Julie", "age": 21, "notes": {"maths": 18,"physique": 17.5, "info": 19}}
+                ]
         with open("data.json", "w") as f:
             json.dump(data, f, indent=4)
-        with open(f"data.json", "r") as f:
-            data_lue = json.load(f)
-            print(data_lue["nom"])
+            with open(f"data.json", "r") as f:
+                data_lue = json.load(f)
+                for personne in data:
+                    print(f"Nom : {personne['nom']}")
+                    print(f"Âge : {personne['age']}")
+                    print("Notes :")
+                    for matiere, note in personne['notes'].items():
+                        print(f"\t{matiere.capitalize()} : {note}")
 
     def lire_csv(self):
         with open('etudiants.csv', 'w', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(['nom', 'prenom', 'age', 'mathematiques', 'pysique', 'Informatique'])
+            writer.writerow(['nom', 'prenom', 'age', 'maths', 'pysique', 'info'])
             writer.writerow(['Dupont', 'Marie', '19', '16.5', '14.75', '18'])
             writer.writerow(['Martin', 'Thomas', '20', '12', '13.5', '15.25'])
             writer.writerow(['Leroy', 'Emma', '18', '17.5', '16', '14'])
@@ -32,7 +39,11 @@ class AgregateurDonnees:
                 print(ligne)
 
     def lire_xml(self):
-        pass
+        root = ET.Element('etudiants')
+
+        tree = ET.ElementTree(root)
+        tree.write('data.xml')
+
 
     def calculer_statistiques(self):
         pass
@@ -41,10 +52,7 @@ class AgregateurDonnees:
         pass
 
 def main():
-    choix = input('Quel type de fichier voulez-vous lire ?'
-                  '1: .json'
-                  '2: .csv'
-                  '3: .xml')
+    pass
 
 
 
