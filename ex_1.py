@@ -17,7 +17,7 @@ class AgregateurDonnees:
             json.dump(data, f, indent=4)
             with open(f"data.json", "r") as f:
                 data_lue = json.load(f)
-                for personne in data:
+                for personne in data_lue:
                     print(f"Nom : {personne['nom']}")
                     print(f"Âge : {personne['age']}")
                     print("Notes :")
