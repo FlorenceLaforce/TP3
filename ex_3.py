@@ -1,4 +1,9 @@
-class MotDePass:
+import string
+import random
+import time
+
+
+class MotDePasse:
     def __init__(self, valeur: str):
         if not isinstance(valeur, str):
             raise TypeError("La valeur doit être une chaîne de caractères.")
@@ -64,10 +69,58 @@ class MotDePass:
 
 
     def tester_force_brute(self, caracteres_connus = 0, max_tentatives = 10000):
-        pass
+        if not isinstance(caracteres_connus, int) or not isinstance(max_tentatives, int):
+            raise TypeError("Les paramètres doivent être des entiers.")
+
+
+        alphabet = string.ascii_letters + string.digits
+        connues = self.__valeur[:caracteres_connus]
+        inconnues = self.__valeur[caracteres_connus:]
+
+        tentatives = 0
+        trouve = False
+        debut = time.time()
+
+        while tentatives < max_tentatives:
+            tentative = ''.join(random.choices(alphabet, k=len(inconnues)))
+            if tentative == inconnues:
+                trouve = True
+                break
+            tentatives += 1
+
+        fin = time.time()
+        temps_ecoule = fin - debut
+        return trouve, tentatives, temps_ecoule
+
+
 
     def estimer_temps_cassage(self):
-        pass
+        N = 0
+        if self.contient_minuscules():
+            N += 26
+        if self.contient_majuscules():
+            N += 26
+        if self.contient_chiffre():
+            N += 10
+        if self.contient_symbole():
+            N += 32
+
+        combinaison = N**self.__longueur
+        temps_secondes = combinaison/1000000000
+
+        if temps_secondes < 60:
+            return f"{temps_secondes:.2f} secondes"
+        temps_minutes = temps_secondes/60
+        if temps_minutes < 60:
+            return f"{temps_minutes:.2f} minutes"
+        temps_heures = temps_minutes/60
+        if temps_heures < 24:
+            return f"{temps_heures:.2f} heures"
+        temps_jours = temps_heures/24
+        if temps_jours < 365:
+            return f"{temps_jours:.2f} jours"
+        temps_annee = temps_jours/365
+        return f"{temps_annee:.2f} annees"
 
     def __str__(self):
         mdp_masquee = self.__valeur[1:] + '*' * (self.__longueur - 2)
@@ -75,7 +128,32 @@ class MotDePass:
 
 class GenerateurMotdePasse:
     def __init__(self):
-        self.__minuscules = "abcdefghijklmnopqrstuvwxyz"
-        self.__majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.__minuscules = string.ascii_lowercase
+        self.__majuscules = string.ascii_uppercase
+        self.__chiffre = string.digits
+        self.__symbole = "!@#$%^&*()-_+=[]{}|:;',.<>?/"
 
+    def generer_aleatoire(self, longueur = 8, avec_symboles = False) -> MotDePasse:
+        if not isinstance(longueur, int) or not isinstance(avec_symboles, bool):
+            raise TypeError("Mot de passe invalide")
+
+        mdp_aleatoire = self.__minuscules + self.__majuscules + self.__chiffre
+        if avec_symboles:
+            mdp_aleatoire += self.__symbole
+        while True:
+            mot = ''.join(random.choice(mdp_aleatoire, i=longueur))
+            mdp = MotDePasse(mot)
+            if mdp.contient_minuscules() and mdp.contient_majuscules() and mdp.contient_chiffre() and (not avec_symboles or mdp.contient_symbole()):
+                return mdp
+
+    def generer_simple(self, mot_base: str):
+        if not isinstance(mot_base, str):
+            raise TypeError("Mot de passe invalide: Doit être une chaîne de caractères")
+
+        substitution = {"a": 4, "e": 3, "i": 1, "o": 0, "s": "$"}
+        nouveau_mdp = ''
+        for c in mot_base:
+            nouveau_mdp += substitution.get(c.lower(), c)
+        nouveau_mdp += str(random.randint(0, 9))
+        return MotDePasse(nouveau_mdp)
 
