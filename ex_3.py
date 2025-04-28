@@ -54,7 +54,7 @@ class MotDePasse:
         self.__score_securite = 0 <= score <= 100
         return score
 
-    def suggerer_amelioration(self) -> list:
+    def suggerer_amelioration(self):
         suggestion = []
         if self.__longueur < 8:
             suggestion.append("Vous devriez augmenter la longueur du mot de passe")
@@ -141,7 +141,7 @@ class GenerateurMotdePasse:
         if avec_symboles:
             mdp_aleatoire += self.__symbole
         while True:
-            mot = ''.join(random.choice(mdp_aleatoire, i=longueur))
+            mot = ''.join(random.choice(mdp_aleatoire))
             mdp = MotDePasse(mot)
             if mdp.contient_minuscules() and mdp.contient_majuscules() and mdp.contient_chiffre() and (not avec_symboles or mdp.contient_symbole()):
                 return mdp
@@ -150,10 +150,14 @@ class GenerateurMotdePasse:
         if not isinstance(mot_base, str):
             raise TypeError("Mot de passe invalide: Doit être une chaîne de caractères")
 
-        substitution = {"a": 4, "e": 3, "i": 1, "o": 0, "s": "$"}
+        substitution = {"a": '4', "e": '3', "i": '1', "o": '0', "s": "$"}
         nouveau_mdp = ''
         for c in mot_base:
             nouveau_mdp += substitution.get(c.lower(), c)
         nouveau_mdp += str(random.randint(0, 9))
         return MotDePasse(nouveau_mdp)
 
+
+
+mon_mdp = GenerateurMotdePasse().generer_aleatoire(1)
+print(mon_mdp)
