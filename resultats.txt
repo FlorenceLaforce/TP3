@@ -1,0 +1,24 @@
+Statistiques pour maths:
+  Moyenne: 14.11
+  Mediane: 14.5
+  Ecart_type: 3.04
+
+Statistiques pour physique:
+  Moyenne: 13.86
+  Mediane: 14.0
+  Ecart_type: 2.27
+
+Statistiques pour informatique:
+  Moyenne: 15.56
+  Mediane: 15.25
+  Ecart_type: 2.19
+
+Répartition par tranche d'âge:
+  18-19 ans: 5 étudiants
+  20-21 ans: 4 étudiants
+  22+ ans: 0 étudiants
+
+Top 3 des meilleurs étudiants:
+  Moreau Julie avec une moyenne de 18.17
+  Marie Dupont avec une moyenne de 16.42
+  Emma Leroy avec une moyenne de 15.83

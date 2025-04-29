@@ -1,0 +1,29 @@
+[
+  {
+    "nom_complet": "Garcia Sophie",
+ "age": 20,
+ "notes": {
+  "maths": 15,
+  "physique": 12.5,
+ "info": 16.25
+    }
+  },
+  {
+    "nom_complet": "Bernard Antoine",
+    "age": 19,
+    "notes": {
+      "maths": 13.5,
+      "physique": 14,
+      "info": 12
+    }
+   },
+  {
+    "nom_complet": "Moreau Julie",
+    "age": 21,
+    "notes": {
+      "maths": 18,
+      "physique": 17.5,
+      "info": 19
+    }
+  }
+ ]
